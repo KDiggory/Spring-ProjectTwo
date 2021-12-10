@@ -8,5 +8,12 @@ import com.bae.gardening.entity.Plants;
 
 public interface PlantsRepo extends JpaRepository<Plants, Integer>{
 	
+	Plants getByName(String type);
 	
+	List<Plants> getAllByFoliageColour(String colour);
+	
+	List<Plants> getAllByPlantingMonth(String season);
+	
+	List<Plants> getAllByPlantingPosition(String position);
+
 }
