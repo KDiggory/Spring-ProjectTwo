@@ -56,13 +56,13 @@ public class PlantsController {
 	public ResponseEntity<Plants> getPlantByName(@PathVariable String name) throws PlantingPositionNotFoundException {
 		return ResponseEntity.ok(this.service.getPlantByName(name));
 	}
-	@GetMapping("/getPlantByMonth/{name}")
+	@GetMapping("/getPlantByMonth/{month}")
 	public ResponseEntity<List<Plants>> getPlantByMonth(@PathVariable String month) throws MonthNotFoundException {
 		return ResponseEntity.ok(this.service.getByPlantingMonth(month));
 	}
-	@GetMapping("/getByPlantingPosition/{name}")
-	public ResponseEntity<List<Plants>> getByPlantingPosition(@PathVariable String colour) throws PlantingPositionNotFoundException {
-		return ResponseEntity.ok(this.service.getByPlantingPosition(colour));
+	@GetMapping("/getByPlantingPosition/{position}")
+	public ResponseEntity<List<Plants>> getByPlantingPosition(@PathVariable String position) throws PlantingPositionNotFoundException {
+		return ResponseEntity.ok(this.service.getByPlantingPosition(position));
 	}
 	
 	@PutMapping("/updatePlant/{id}") 
