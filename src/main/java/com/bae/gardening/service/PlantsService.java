@@ -2,7 +2,7 @@ package com.bae.gardening.service;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
+
 import org.springframework.stereotype.Service;
 
 import com.bae.gardening.entity.Plants;
@@ -17,12 +17,12 @@ public class PlantsService {
 	//this does the logic
 	
 	public PlantsRepo repo;
-	private ModelMapper mapper;
+
 		
-	public PlantsService(PlantsRepo repo, ModelMapper mapper) {
+	public PlantsService(PlantsRepo repo) {
 		super();
 		this.repo = repo;
-		this.mapper = mapper;
+		
 	}
 
 	public Plants createPlant(Plants plant) {
