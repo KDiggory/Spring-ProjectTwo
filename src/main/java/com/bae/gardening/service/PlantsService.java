@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.bae.gardening.entity.Plants;
 import com.bae.gardening.exceptions.MonthNotFoundException;
-import com.bae.gardening.exceptions.PlantingPositionNotFoundException;
 import com.bae.gardening.exceptions.PlantsNotFoundException;
 import com.bae.gardening.repo.PlantsRepo;
 
@@ -50,16 +49,7 @@ public class PlantsService {
 //		});
 //		return saved;
 //	}
-	public List<Plants> getByPlantingPosition(String position)  { //throws PlantingPositionNotFoundException
-		return this.repo.getAllByPlantingPosition(position);
-	}
-//				.orElseThrow(() -> {
-//		      
-//		       return new PlantingPositionNotFoundException("No plant found with that planting position");
-//		});
-//		return saved;
-//	}
-//	
+
 	public Plants getPlantByName(String name) {
 		return this.repo.getByName(name);
 	}

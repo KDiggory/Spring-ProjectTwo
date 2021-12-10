@@ -2,6 +2,7 @@ package com.bae.gardening.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bae.gardening.entity.Plants;
 import com.bae.gardening.exceptions.MonthNotFoundException;
-import com.bae.gardening.exceptions.PlantingPositionNotFoundException;
+
 import com.bae.gardening.exceptions.PlantsNotFoundException;
 import com.bae.gardening.service.PlantsService;
 
@@ -53,17 +54,14 @@ public class PlantsController {
 	}
 	
 	@GetMapping("/getPlantByName/{name}")
-	public ResponseEntity<Plants> getPlantByName(@PathVariable String name) throws PlantingPositionNotFoundException {
+	public ResponseEntity<Plants> getPlantByName(@PathVariable String name) {
 		return ResponseEntity.ok(this.service.getPlantByName(name));
 	}
 	@GetMapping("/getPlantByMonth/{month}")
 	public ResponseEntity<List<Plants>> getPlantByMonth(@PathVariable String month) throws MonthNotFoundException {
 		return ResponseEntity.ok(this.service.getByPlantingMonth(month));
 	}
-	@GetMapping("/getByPlantingPosition/{position}")
-	public ResponseEntity<List<Plants>> getByPlantingPosition(@PathVariable String position) throws PlantingPositionNotFoundException {
-		return ResponseEntity.ok(this.service.getByPlantingPosition(position));
-	}
+	
 	
 	@PutMapping("/updatePlant/{id}") 
 	public ResponseEntity<Plants> updatePlant(@PathVariable Integer id, @RequestBody Plants newPlant) {
@@ -72,7 +70,7 @@ public class PlantsController {
 		return response;
 	}
 	
-	@PutMapping("/updatePlantByName/{name}") 
+	@PutMapping("/updatePlantByName/{name}") // this isnt working
 	public ResponseEntity<Plants> updatePlantByName(@PathVariable String name, @RequestBody Plants newPlant) {
 		Plants body = this.service.updatePlantByName(name, newPlant);
 		ResponseEntity<Plants> response = new ResponseEntity<Plants>(body, HttpStatus.ACCEPTED);
