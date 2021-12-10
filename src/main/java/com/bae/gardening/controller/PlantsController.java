@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.bae.gardening.entity.Plants;
+import com.bae.gardening.exceptions.MonthNotFoundException;
+import com.bae.gardening.exceptions.PlantingPositionNotFoundException;
+import com.bae.gardening.exceptions.PlantsNotFoundException;
+import com.bae.gardening.service.PlantsService;
 
 
 
@@ -44,26 +48,33 @@ public class PlantsController {
 	}
 	
 	@GetMapping("/getPlantById/{id}")
-	public ResponseEntity<Plants> getPlantById(@PathVariable Integer id) {
-		return ResponseEntity.ok(this.service.getPlantById(id));
+	public ResponseEntity<Plants> getPlantById(@PathVariable Integer id) throws PlantsNotFoundException {
+		return ResponseEntity.ok(this.service.getByID(id));
 	}
 	
 	@GetMapping("/getPlantByName/{name}")
-	public ResponseEntity<List<Plants>> getPlantByName(@PathVariable String name) {
+	public ResponseEntity<Plants> getPlantByName(@PathVariable String name) throws PlantingPositionNotFoundException {
 		return ResponseEntity.ok(this.service.getPlantByName(name));
 	}
 	@GetMapping("/getPlantByMonth/{name}")
-	public ResponseEntity<List<Plants>> getPlantByMonth(@PathVariable String month) {
-		return ResponseEntity.ok(this.service.getPlantByMonth(month));
+	public ResponseEntity<List<Plants>> getPlantByMonth(@PathVariable String month) throws MonthNotFoundException {
+		return ResponseEntity.ok(this.service.getByPlantingMonth(month));
 	}
-	@GetMapping("/getPlantByFoliageColour/{name}")
-	public ResponseEntity<List<Plants>> getPlantByFoliageColour(@PathVariable String colour) {
-		return ResponseEntity.ok(this.service.getPlantByFoliageColour(colour));
+	@GetMapping("/getByPlantingPosition/{name}")
+	public ResponseEntity<List<Plants>> getByPlantingPosition(@PathVariable String colour) throws PlantingPositionNotFoundException {
+		return ResponseEntity.ok(this.service.getByPlantingPosition(colour));
 	}
 	
 	@PutMapping("/updatePlant/{id}") 
 	public ResponseEntity<Plants> updatePlant(@PathVariable Integer id, @RequestBody Plants newPlant) {
-		Plants body = this.service.updatePlant(id, newPlant);
+		Plants body = this.service.updatePlant(newPlant, id);
+		ResponseEntity<Plants> response = new ResponseEntity<Plants>(body, HttpStatus.ACCEPTED);
+		return response;
+	}
+	
+	@PutMapping("/updatePlantByName/{name}") 
+	public ResponseEntity<Plants> updatePlantByName(@PathVariable String name, @RequestBody Plants newPlant) {
+		Plants body = this.service.updatePlantByName(name, newPlant);
 		ResponseEntity<Plants> response = new ResponseEntity<Plants>(body, HttpStatus.ACCEPTED);
 		return response;
 	}
@@ -71,7 +82,7 @@ public class PlantsController {
 	public ResponseEntity<Plants> deletePlant(@PathVariable Integer id) {
 		this.service.deletePlant(id);
 		ResponseEntity<Plants> response = new ResponseEntity<Plants>(HttpStatus.NO_CONTENT);
-		return response;
+		return response; 
 	}
 	
 		

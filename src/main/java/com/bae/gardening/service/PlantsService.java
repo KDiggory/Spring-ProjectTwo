@@ -6,6 +6,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.bae.gardening.entity.Plants;
+import com.bae.gardening.exceptions.MonthNotFoundException;
+import com.bae.gardening.exceptions.PlantingPositionNotFoundException;
+import com.bae.gardening.exceptions.PlantsNotFoundException;
+import com.bae.gardening.repo.PlantsRepo;
 
 
 @Service
@@ -51,6 +55,10 @@ public class PlantsService {
 		});
 		return saved;
 	}
+	
+	public Plants getPlantByName(String name) throws PlantingPositionNotFoundException {
+		return this.repo.getByName(name);
+	}
 	public Plants updatePlant(Plants plant, Integer id) {
 		Plants toUpdate = this.repo.findById(id).get();
 		toUpdate.setName(plant.getName());
@@ -61,7 +69,7 @@ public class PlantsService {
 		return this.repo.save(toUpdate);
 		
 	}
-	public Plants updatePlantByName(String name) {
+	public Plants updatePlantByName(String name, Plants newPlant) {
 		Plants toUpdate = this.repo.getByName(name);
 		toUpdate.setFoliageColour(toUpdate.getFoliageColour());
 		toUpdate.setPlantingMonth(toUpdate.getPlantingMonth());
