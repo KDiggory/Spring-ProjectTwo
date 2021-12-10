@@ -48,6 +48,19 @@ public class PlantsController {
 		return ResponseEntity.ok(this.service.getPlantById(id));
 	}
 	
+	@GetMapping("/getPlantByName/{name}")
+	public ResponseEntity<List<Plants>> getPlantByName(@PathVariable String name) {
+		return ResponseEntity.ok(this.service.getPlantByName(name));
+	}
+	@GetMapping("/getPlantByMonth/{name}")
+	public ResponseEntity<List<Plants>> getPlantByMonth(@PathVariable String month) {
+		return ResponseEntity.ok(this.service.getPlantByMonth(month));
+	}
+	@GetMapping("/getPlantByFoliageColour/{name}")
+	public ResponseEntity<List<Plants>> getPlantByFoliageColour(@PathVariable String colour) {
+		return ResponseEntity.ok(this.service.getPlantByFoliageColour(colour));
+	}
+	
 	@PutMapping("/updatePlant/{id}") 
 	public ResponseEntity<Plants> updatePlant(@PathVariable Integer id, @RequestBody Plants newPlant) {
 		Plants body = this.service.updatePlant(id, newPlant);
