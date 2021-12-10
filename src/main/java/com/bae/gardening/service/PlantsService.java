@@ -41,22 +41,26 @@ public class PlantsService {
 		});
 		return saved;
 	}
-	public List<Plants> getByPlantingMonth(String month) throws MonthNotFoundException {
-		List<Plants> saved = this.repo.getAllByPlantingMonth(month).orElseThrow(() -> {
-		      
-		       return new MonthNotFoundException("No plant found with that planting month");
-		});
-		return saved;
+	public List<Plants> getByPlantingMonth(String month)  { //throws MonthNotFoundException
+		return this.repo.getAllByPlantingMonth(month);
 	}
-	public List<Plants> getByPlantingPosition(String position) throws PlantingPositionNotFoundException {
-		List<Plants> saved = this.repo.getAllByPlantingPosition(position).orElseThrow(() -> {
-		      
-		       return new PlantingPositionNotFoundException("No plant found with that planting position");
-		});
-		return saved;
+//	.orElseThrow(() -> {
+//		      
+//		       return new MonthNotFoundException("No plant found with that planting month");
+//		});
+//		return saved;
+//	}
+	public List<Plants> getByPlantingPosition(String position)  { //throws PlantingPositionNotFoundException
+		return this.repo.getAllByPlantingPosition(position);
 	}
-	
-	public Plants getPlantByName(String name) throws PlantingPositionNotFoundException {
+//				.orElseThrow(() -> {
+//		      
+//		       return new PlantingPositionNotFoundException("No plant found with that planting position");
+//		});
+//		return saved;
+//	}
+//	
+	public Plants getPlantByName(String name) {
 		return this.repo.getByName(name);
 	}
 	public Plants updatePlant(Plants plant, Integer id) {
